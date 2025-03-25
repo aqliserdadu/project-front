@@ -10,6 +10,7 @@ import Setting from "./pages/Setting";
 import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
 import WifiSet from "./pages/WifiSet";
+import WifiDetail from "./pages/WifiDetail";
 import EthSet from "./pages/EthSet";
 import AddRainSensor from "./pages/AddRainSensor";
 import AddSensor from "./pages/AddSensor";
@@ -25,14 +26,15 @@ function App() {
       <Routes> 
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home />} />
-          <Route path="values" element={<Values />} />
-          <Route path="timeSeries" element={<TimeSeries />} />
-          <Route path="service" element={<Service />} />
-          <Route path="serviceLogin" element={<ServiceLogin />} />
-          <Route path="setting" element={<Setting />} />
-          <Route path="help" element={<Help />} />
-          <Route path="wifiSet" element={<WifiSet />} />
-          <Route path="ethSet" element={<EthSet />} />
+          <Route path="/values" element={<Values />} />
+          <Route path="/timeSeries" element={<TimeSeries />} />
+          <Route path="/service" element={<Service />} />
+          <Route path="/serviceLogin" element={<ServiceLogin />} />
+          <Route path="/setting" element={<Setting />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/wifiSet" element={<WifiSet />} />
+          <Route path="/wifiDetail" element={<WifiDetail />} />
+          <Route path="/ethSet" element={<EthSet />} />
           <Route path="/addrainsensor" element={<AddRainSensor />} />
           <Route path="/addsensor" element={<AddSensor />} />
           <Route path="/editsensor/:id" element={<EditSensor />} />

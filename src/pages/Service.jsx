@@ -8,7 +8,7 @@ function EnterServiceAwal({ onEnterService }) {
       <div className="row">
         <div className="col-md-12 col-lg-12">
           <div className="text-center mt-5">
-            <button className="btn btn-primary" onClick={onEnterService}>
+            <button className="btn btn-dark btn-lg rounded-5 w-50 fs-4" onClick={onEnterService}>
               Enter Service Mode
             </button>
           </div>
@@ -36,25 +36,30 @@ function EnterService({ cekLogin }) {
 
   return (
     <>
+   
       <div
         style={{
           backgroundColor: "black",
           padding: "5px",
-          margin: "0 auto",
-          width: "300px",
+          margin: "50px auto",
+          width: "500px",
+          height:"80px",
           color: "white",
           textAlign: "center",
+          fontSize:"30px",
+          fontWeight:"bold",
+          borderRadius:"10px"
         }}
       >
-        <label>Login for Entering Service Mode</label>
+        <label style={{marginTop:"10px"}}>Login for Entering Service Mode</label>
       </div>
       <br />
-      <div style={{ padding: "5px", margin: "0 auto", width: "300px" }}>
+      <div style={{ padding: "5px", margin: "0 auto", width: "400px" }}>
         <div className="mb-3">
-          <label className="form-label">Username</label>
+          <h3>Username :</h3>
           <input
             type="text"
-            className="form-control"
+            className="form-control-lg rounded-5 w-100"
             id="username"
             placeholder="Masukkan username"
             value={username}
@@ -63,10 +68,10 @@ function EnterService({ cekLogin }) {
         </div>
 
         <div className="mb-3">
-          <label className="form-label">Password</label>
+          <h3>Password :</h3>
           <input
             type="password"
-            className="form-control"
+            className="form-control-lg rounded-5 w-100" 
             id="password"
             value={password}
             placeholder="Masukkan password"
@@ -74,12 +79,14 @@ function EnterService({ cekLogin }) {
           />
         </div>
 
+<div className="mt-2 text-end">
         <button
           onClick={() => cekLogin(username, password)}
-          className="btn btn-primary w-100"
+          className="btn btn-light btn-lg w-25 rounded-5"
         >
           Login
         </button>
+      </div>
       </div>
     </>
   );
