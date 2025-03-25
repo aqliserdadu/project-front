@@ -1,7 +1,27 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ServiceLogin() {
+function ServiceMode() {
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    const time = localStorage.getItem("time");
+    if (!user || !time || Date.now() > time) {
+      localStorage.removeItem("user");
+      localStorage.removeItem("time");
+      navigate("/service"); // Kembali ke login jika token expired
+  }
+}, []);
+
+
+const logout = () =>{
+
+  localStorage.removeItem("user");
+  navigate("/service");
+}
+
   const data = [
     { parameter: "Temperature", actualValue: 27.05, finalValue: 27.05 },
     { parameter: "Humidity", actualValue: 60.2, finalValue: 60.2 },
@@ -13,7 +33,7 @@ function ServiceLogin() {
       <div className="container mt-3">
         <div className="row">
           <div className="col-md-12 col-lg-12 text-center mt-3">
-            <button className="btn btn-dark btn-lg w-25 rounded-4 fs-4" onClick={() => navigate(-1)}>Exit Service Mode</button>
+            <button className="btn btn-dark btn-lg w-25 rounded-4 fs-4" onClick={logout}>Exit Service Mode</button>
           </div>
         </div>
         <div style={{ maxHeight: "650px", overflowY: "auto" }}>
@@ -146,4 +166,4 @@ function ServiceLogin() {
   );
 }
 
-export default ServiceLogin;
+export default ServiceMode;

@@ -14,7 +14,7 @@ import WifiDetail from "./pages/WifiDetail";
 import EthSet from "./pages/EthSet";
 import AddRainSensor from "./pages/AddRainSensor";
 import AddSensor from "./pages/AddSensor";
-import ServiceLogin from "./pages/ServiceLogin";
+import ServiceMode from "./pages/ServiceMode";
 import EditSensor from "./pages/EditSensor";
 
 
@@ -29,7 +29,7 @@ function App() {
           <Route path="/values" element={<Values />} />
           <Route path="/timeSeries" element={<TimeSeries />} />
           <Route path="/service" element={<Service />} />
-          <Route path="/serviceLogin" element={<ServiceLogin />} />
+          <Route path="/serviceMode" element={<ServiceMode />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/help" element={<Help />} />
           <Route path="/wifiSet" element={<WifiSet />} />
