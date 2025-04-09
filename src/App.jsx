@@ -10,7 +10,7 @@ import Setting from "./pages/Setting";
 import Help from "./pages/Help";
 import NotFound from "./pages/NotFound";
 import WifiSet from "./pages/WifiSet";
-import WifiDetail from "./pages/WifiDetail";
+import DetailConn from "./pages/DetailConn";
 import EthSet from "./pages/EthSet";
 import AddRainSensor from "./pages/AddRainSensor";
 import AddSensor from "./pages/AddSensor";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/setting" element={<Setting />} />
           <Route path="/help" element={<Help />} />
           <Route path="/wifiSet" element={<WifiSet />} />
-          <Route path="/wifiDetail" element={<WifiDetail />} />
+          <Route path="/detailConn" element={<DetailConn />} />
           <Route path="/ethSet" element={<EthSet />} />
           <Route path="/addrainsensor" element={<AddRainSensor />} />
           <Route path="/addsensor" element={<AddSensor />} />

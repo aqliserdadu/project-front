@@ -37,6 +37,76 @@ const logout = () =>{
           </div>
         </div>
         <div style={{ maxHeight: "650px", overflowY: "auto" }}>
+
+          <div className="row mt-4">
+            <div className="col-md-12 col-lg-12">
+                <div className="bg-black  rounded-4">
+                  <label className="py-3 text-white fs-5 fw-bold p-2">Device Setting</label>
+                </div>
+
+                <div className="col-md-12 mt-3">
+                  <div className="row">
+                    <div className="col-md-3">
+                      <label className=" fs-5 fw-bold mx-2 me-5 " style={{ color:"#000000" }}>
+                        Device ID
+                      </label>
+                    </div>
+                    <div className="col-md-9">
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-12 mt-3">
+                  <div className="row">
+                    <div className="col-md-3">
+                      <label className=" fs-5 fw-bold mx-2 me-5 " style={{ color:"#000000" }}>
+                        Station Name
+                      </label>
+                    </div>
+                    <div className="col-md-9">
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className="col-md-12 mt-3">
+                  <div className="row">
+                    <div className="col-md-3">
+                      <label className=" fs-5 fw-bold mx-2 me-5 " style={{ color:"#000000" }}>
+                        Latitude
+                      </label>
+                    </div>
+                    <div className="col-md-9">
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-12 mt-3">
+                  <div className="row">
+                    <div className="col-md-3">
+                      <label className=" fs-5 fw-bold mx-2 me-5 " style={{ color:"#000000" }}>
+                        Longitude
+                      </label>
+                    </div>
+                    <div className="col-md-9">
+                      <input type="text" className="form-control" />
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className="text-end mt-3">
+                  <button className="btn btn-success btn-lg">
+                    <i className="fa fa-save"></i> Save
+                  </button>
+                </div>
+
+            </div>
+          </div>
+
           <div className="row">
             <div className="col-md-12 col-lg-12">
               <div className="table-responsive mt-4">
@@ -89,7 +159,7 @@ const logout = () =>{
 
 
               <div className="input-group form-group mt-3">
-                <label className=" fs-5 fw-bold mx-2 me-5 ">
+                <label className=" fs-5 fw-bold mx-2 me-5 " style={{ color:"#000000" }}>
                   Send To KLH Server
                 </label>
                 <div className="form-check form-switch ">
@@ -103,7 +173,7 @@ const logout = () =>{
               </div>
 
               <div className="input-group form-group mt-3">
-                <label className=" fs-5 fw-bold mx-2 me-4 ">
+                <label className=" fs-5 fw-bold mx-2 me-4 " style={{ color:"#000000" }}>
                   Send To WQMS Server
                 </label>
                 <div className="form-check form-switch">
@@ -129,19 +199,19 @@ const logout = () =>{
 
                 <div className="col-md-3 col-lg-3">
                   <div className="form-group  mx-2">
-                    <label className="fs-5 fw-bold">Start date</label>
+                    <label className="fs-5 fw-bold" style={{ color:"#000000" }}>Start date</label>
                     <input type="date" className="form-control fs-5 rounded-2"/>
                   </div>
                 </div>
                 <div className="col-md-3 col-lg-3">
                   <div className="form-group  mx-2">
-                    <label className="fs-5 fw-bold">End date</label>
+                    <label className="fs-5 fw-bold" style={{ color:"#000000" }}>End date</label>
                     <input type="date" className="form-control fs-5 rounded-2"/>
                   </div>
                 </div>
                 <div className="col-md-3 col-lg-3">
                 <div className="form-group  mx-2">
-                    <label className="fs-5 fw-bold">Storage</label>
+                    <label className="fs-5 fw-bold" style={{ color:"#000000" }}>Storage</label>
                     <input type="date" className="form-control fs-5 rounded-2"/>
                   </div>
                 </div>

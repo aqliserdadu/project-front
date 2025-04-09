@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -18,8 +19,28 @@ function EditSensor() {
     slaveID: "",
     length: "",
     functionCode: "",
+    address:"",
+    crc:"",
     metode: "standar",
   });
+
+  const ambilData = async () =>{
+
+    const payload = { id : id}
+    try{
+
+      const response = await axios.get(`api/ambilEditSensor`,{params:payload});
+      alert(response.data.sensor.stopbits)
+    }catch(err){
+
+    }
+
+  }
+
+  useEffect(()=>{
+
+    ambilData();
+  })
 
   // State untuk menyimpan parameter
   const [parameters, setParameters] = useState([

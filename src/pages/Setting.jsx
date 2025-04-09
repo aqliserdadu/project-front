@@ -1,32 +1,163 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function Setting() {
   const navigate = useNavigate();
 
   // State Hooks for Controlled Inputs
+  // Gunakan useRef untuk mencegah pemanggilan ambilData lebih dari sekali
+  const hasFetched = useRef(false);
+
   const [interval, setInterval] = useState("");
   const [email, setEmail] = useState("");
   const [autoMeasure, setAutoMeasure] = useState(false);
+  const [dataSensor, setDataSensor] = useState([]);
 
-  const handleSave = () => {
-    console.log("Settings saved:", { interval, email, autoMeasure });
-    // You may add API calls here to save data
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
-  const handleEdit = (id)=>{
+  const ambilData = async()=>{
+    try{
 
-    navigate(`/editsensor/${id}`)
-  } 
-  
+      const response = await fetch(`api/setting`)
+      const data = await response.json();
+      
+      if(response.ok){
+
+        setInterval(data.interval)
+        setEmail(data.email)
+        setAutoMeasure(data.automeasure == 1 ? true:false )
+        console.log(data)
+
+      }
+      
+    }catch(err){
+
+      Swal.fire({
+        title:"ERROR!",
+        text:err.message,
+        confirmButtonText:"ok"
+      });
+
+    }
+  }
+
+  const ambilSensor = async() =>{
+
+    try{
+
+      const response = await axios.get(`api/ambilSensor`);
+      setDataSensor(response.data.data)
+      console.log(response.data)
+
+    }catch(error){
+
+      Swal.fire({
+        title:"ERROR!",
+        text:err.message,
+        confirmButtonText:"ok"
+      });
+    }
+
+  }
+
+  useEffect(()=>{
+    if (!hasFetched.current) {
+      ambilData();
+      ambilSensor();
+      hasFetched.current = true;
+    }
+  },[])
+
+  const handleSave = async () => {
+
+    
+    if (!interval) {
+      return Swal.fire({
+        title: "Warning!",
+        text: "Data Interval cannot be empty!",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+    }
+    if (!email) {
+      return Swal.fire({
+        title: "Warning!",
+        text: "Email cannot be empty!",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+    }
+
+    if (!validateEmail(email)) {
+      return Swal.fire({
+        title: "Warning!",
+        text: "Invalid email format!",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+    }
+
+    
+    try {
+      const params = JSON.stringify({
+        interval,
+        email,
+        automeasure : autoMeasure ? 1 : 0,
+      });
+
+      const queryparams = new URLSearchParams(JSON.parse(params));
+      const url = `api/saveSetting?${queryparams}`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        Swal.fire({
+          title: "Success!",
+          text: data.message,
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: data.message,
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (err) {
+      console.error("Error saving settings:", err);
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/editsensor/${id}`);
+  };
+
   return (
     <div className="container mt-3">
       {/* General Settings Section */}
       <div className="row">
         <div className="col-lg-12">
-          <div
-            className="bg-black text-white p-2 mt-2 rounded"
-          >
+          <div className="bg-black text-white p-2 mt-2 rounded">
             <h3>General Settings</h3>
           </div>
 
@@ -81,7 +212,7 @@ function Setting() {
 
           <div className="d-flex justify-content-end">
             <button className="btn btn-success" onClick={handleSave}>
-                <i className="fa fa-save"></i> Save
+              <i className="fa fa-save"></i> Save
             </button>
           </div>
         </div>
@@ -90,9 +221,7 @@ function Setting() {
       {/* Sensor Settings Section */}
       <div className="row mt-4">
         <div className="col-lg-12">
-          <div
-            className="bg-black text-white p-2 mt-2 rounded"
-          >
+          <div className="bg-black text-white p-2 mt-2 rounded">
             <h3>Sensor Settings</h3>
           </div>
 
@@ -122,19 +251,16 @@ function Setting() {
                   </tr>
                 </thead>
                 <tbody>
-                  {[
-                    {id:"1", name: "AT500", parameters: "pH, TSS, NH3N" },
-                    {id:"2", name: "AT500", parameters: "pH, TSS, NH3N" },
-                    {id:"3", name: "AT500", parameters: "pH, TSS, NH3N" },
-                    {id:"4", name: "Mace", parameters: "Debit" },
-                    {id:"5", name: "Spectro::lyser", parameters: "COD, BOD" },
-                  ].map((sensor, index) => (
+                  {dataSensor.map((sensor, index) => (
                     <tr key={index}>
-                      <td>{sensor.name}</td>
+                      <td>{sensor.sensorname}</td>
                       <td>{sensor.parameters}</td>
                       <td>
-                        <button className="btn btn-warning btn-sm mx-2" onClick={()=>handleEdit(sensor.id)}>
-                          <i className="fa fa-edit" ></i>
+                        <button
+                          className="btn btn-warning btn-sm mx-2"
+                          onClick={() => handleEdit(sensor.id)}
+                        >
+                          <i className="fa fa-edit"></i>
                         </button>
                         <button className="btn btn-danger btn-sm">
                           <i className="fa fa-trash"></i>

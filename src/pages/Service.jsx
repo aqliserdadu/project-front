@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import segitiga from "../assets/segitiga.png";
+import segitiga from "../assets/Service-mode.svg";
+import Swal from 'sweetalert2';
+
 
 function EnterServiceAwal({ onEnterService }) {
   return (
@@ -17,9 +19,9 @@ function EnterServiceAwal({ onEnterService }) {
               <img src={segitiga} style={{ width: "250px", height: "auto" }} alt="warning" />
             </div>
             <div className="text-center mt-5">
-              <h5>For Professional personnel only.</h5>
-              <h5>Any damage or errors resulting from usage</h5>
-              <h5>are the responsibility of the user.</h5>
+              <h4>For Professional personnel only.</h4>
+              <h4>Any damage or errors resulting from usage</h4>
+              <h4>are the responsibility of the user.</h4>
             </div>
           </div>
         </div>
@@ -28,7 +30,7 @@ function EnterServiceAwal({ onEnterService }) {
   );
 }
 
-function EnterService({ cekLogin, loading, error }) {
+function EnterService({ cekLogin, loading }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -53,7 +55,7 @@ function EnterService({ cekLogin, loading, error }) {
       <br />
       <div style={{ padding: "5px", margin: "0 auto", width: "400px" }}>
         <div className="mb-3">
-          <h3>Username :</h3>
+          <h3 style={{ color:"#000000" }}>Username :</h3>
           <input
             type="text"
             className="form-control-lg rounded-5 w-100"
@@ -64,7 +66,7 @@ function EnterService({ cekLogin, loading, error }) {
         </div>
 
         <div className="mb-3">
-          <h3>Password :</h3>
+          <h3 style={{ color:"#000000" }}>Password :</h3>
           <input
             type="password"
             className="form-control-lg rounded-5 w-100"
@@ -74,7 +76,7 @@ function EnterService({ cekLogin, loading, error }) {
           />
         </div>
 
-        {error && <p className="text-danger text-center">{error}</p>}
+       
 
         <div className="mt-2 text-end">
           <button onClick={() => cekLogin(username, password)} className="btn btn-light btn-lg w-25 rounded-5" disabled={loading}>
@@ -94,10 +96,10 @@ function Service() {
 
   async function cekLogin(username, password) {
     setLoading(true);
-    setError("");
+   
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/login", {
+      const response = await fetch(`api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,11 +115,28 @@ function Service() {
         localStorage.setItem("time", expiryTime);
         //alert(data.message);
         navigate("/serviceMode");
-      } else {
-        setError(data.message || "Login gagal, periksa kembali username dan password.");
       }
+      
+      if(!response.ok){
+        
+          Swal.fire({
+              title: 'Gagal!',
+              text: data.message,
+              icon: 'error',
+              confirmButtonText: 'OK'
+          });
+
+       }
     } catch (err) {
-      setError("Terjadi kesalahan saat menghubungi server.");
+
+      Swal.fire({
+          title: 'ERROR!',
+          text: err.message,
+          icon: 'error',
+          confirmButtonText: 'OK'
+      });
+
+
     } finally {
       setLoading(false);
     }
@@ -125,7 +144,7 @@ function Service() {
 
   return (
     <>
-      {isLoginMode ? <EnterService cekLogin={cekLogin} loading={loading} error={error} /> : <EnterServiceAwal onEnterService={() => setIsLoginMode(true)} />}
+      {isLoginMode ? <EnterService cekLogin={cekLogin} loading={loading} /> : <EnterServiceAwal onEnterService={() => setIsLoginMode(true)} />}
     </>
   );
 }
