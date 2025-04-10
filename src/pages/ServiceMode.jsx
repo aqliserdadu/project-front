@@ -99,7 +99,7 @@ const logout = () =>{
 
 
                 <div className="text-end mt-3">
-                  <button className="btn btn-success btn-lg">
+                  <button className="btn btn-success">
                     <i className="fa fa-save"></i> Save
                   </button>
                 </div>
@@ -113,10 +113,10 @@ const logout = () =>{
                 <table className="table table-striped w-100">
                   <thead>
                     <tr>
-                      <th className="bg-dark text-white fs-5 py-3">Parameter</th>
-                      <th className="bg-dark text-white fs-5 py-3">Actual Value</th>
-                      <th className="bg-dark text-white text-center fs-5 py-3">Offset</th>
-                      <th className="bg-dark text-white fs-5 py-3">Final Value</th>
+                      <th className="bg-black text-white fs-5 py-3">Parameter</th>
+                      <th className="bg-black text-white fs-5 py-3">Actual Value</th>
+                      <th className="bg-black text-white text-center fs-5 py-3">Offset</th>
+                      <th className="bg-black text-white fs-5 py-3">Final Value</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -133,18 +133,28 @@ const logout = () =>{
                         <td className="text-center fs-5">{item.finalValue}</td>
                       </tr>
                     ))}
-                  </tbody>
+                  </tbody> 
+                  <tfoot>
+                    <tr>
+                      <td className="bg-black"></td>
+                      <td className="bg-black"></td>
+                      <td className="bg-black"></td>
+                      <td className="bg-black">
+                          <div className="text-end">
+                            <button className="btn btn-success  mx-2">
+                              <i className="fa fa-save"></i> Save
+                            </button>
+                            <button className="btn btn-info">
+                              <i className="fa fa-book"></i> Manual Reading
+                            </button>
+                          </div>
+                      </td>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
-
-              <div className="text-end mt-3">
-                <button className="btn btn-success btn-lg mx-3">
-                  <i className="fa fa-save"></i> Save
-                </button>
-                <button className="btn btn-info btn-lg">
-                  <i className="fa fa-book"></i> Manual Reading
-                </button>
-              </div>
+                    
+              
             </div>
 
           </div>
@@ -152,42 +162,124 @@ const logout = () =>{
 
           <div className="row mt-4">
             <div className="col-md-12 col-lg-12">
-              <div className="bg-black  rounded-4">
-                <label className="py-3 text-white fs-5 fw-bold p-2">Sending data option</label>
-              </div>
+              <div className="table-responsive mt-4">
+                <table className="table table-striped w-100">
+                  <thead>
+                    <tr>
+                      <th className="bg-black text-white fs-5 py-3">Sending data option</th>
+                      <th className="bg-black  text-white text-center fs-5 py-3">Api Url</th>
+                      <th className="bg-black  text-white text-center fs-5 py-3">Token Url</th>
+                      <th className="bg-black  text-white fs-5 py-3">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <label className=" fs-6 fw-bold text-black ">Send To KLH Server</label>
+                      </td>
+                      <td>
+                        <input type="text"className="form-control bg-dark-subtle rounded-5"/>
+                      </td>
+                      <td>
+                        <input type="text"className="form-control bg-dark-subtle rounded-5"/>
+                      </td>
+                      <td>
+                        <div className="form-check form-switch ">
+                          <input style={{ width: "80px", height: "25px" }} type="checkbox" className="form-check-input toggle-switch"/>
+                        </div>
+                      </td>
+                    </tr>
 
-
-
-              <div className="input-group form-group mt-3">
-                <label className=" fs-5 fw-bold mx-2 me-5 " style={{ color:"#000000" }}>
-                  Send To KLH Server
-                </label>
-                <div className="form-check form-switch ">
-                  <input
-                    style={{ width: "80px", height: "25px" }}
-                    type="checkbox"
-                    className="form-check-input toggle-switch"
-
-                  />
-                </div>
-              </div>
-
-              <div className="input-group form-group mt-3">
-                <label className=" fs-5 fw-bold mx-2 me-4 " style={{ color:"#000000" }}>
-                  Send To WQMS Server
-                </label>
-                <div className="form-check form-switch">
-                  <input
-                    style={{ width: "80px", height: "25px" }}
-                    type="checkbox"
-                    className="form-check-input toggle-switch"
-
-                  />
-                </div>
+                    <tr>
+                      <td>
+                        <label className=" fs-6 fw-bold text-black ">Send To WQMS Server</label>
+                      </td>
+                      <td>
+                        <input type="text"className="form-control bg-dark-subtle rounded-5"/>
+                      </td>
+                      <td>
+                        <input type="text"className="form-control bg-dark-subtle rounded-5"/>
+                      </td>
+                      <td>
+                        <div className="form-check form-switch ">
+                          <input style={{ width: "80px", height: "25px" }} type="checkbox" className="form-check-input toggle-switch"/>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td className="bg-black"></td>
+                      <td className="bg-black"></td>
+                      <td className="bg-black"></td>
+                      <td className="bg-black">
+                          <div className="text-end">
+                            <button className="btn btn-success">
+                              <i className="fa fa-save"></i> Save
+                            </button>
+                          </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
 
             </div>
           </div>
+
+
+          <div className="row mt-4">
+            <div className="col-md-12 col-lg-12">
+              <div className="table-responsive mt-4">
+                <table className="table table-striped w-100">
+                  <thead>
+                    <tr>
+                      <th className="bg-black text-white fs-5 py-3" colSpan={2}>Email Setting Option</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <label><b>Server</b></label>
+                        <input type="text" className="form-control bg-dark-subtle rounded-2"/>
+                      </td>
+                      <td>
+                        <label><b>Username</b></label>
+                        <input type="text" className="form-control bg-dark-subtle rounded-2"/>
+                      </td>
+                      
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <label><b>Port</b></label>
+                        <input type="text" className="form-control bg-dark-subtle rounded-2"/>
+                      </td>
+                      <td>
+                        <label><b>Password</b></label>
+                        <input type="text" className="form-control bg-dark-subtle rounded-2"/>
+                      </td>
+                      
+                    </tr>
+
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td className="bg-black" colSpan={2}>
+                          <div className="text-end">
+                            <button className="btn btn-success">
+                              <i className="fa fa-save"></i> Save
+                            </button>
+                          </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+            </div>
+          </div>
+
 
           <div className="row mt-4">
             <div className="col-md-12 col-lg-12">
